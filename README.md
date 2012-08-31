@@ -3,6 +3,7 @@ Chef cookbook to install graphite based on http://obfuscurity.com/2012/08/Screen
 Requirements
 ============
 Please run apt-get update before running the recipes
+
 Tested on Ubuntu 12.04
 
 Gotchas
