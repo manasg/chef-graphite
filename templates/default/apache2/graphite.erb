@@ -1,0 +1,26 @@
+<VirtualHost *:443>
+  SSLEngine on
+  SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+  SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key
+  ServerName graphite
+  CustomLog /var/log/apache2/access.log combined
+  ErrorLog /var/log/apache2/error.log
+
+  WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi
+
+  Alias /media/ "/usr/lib/pymodules/python2.6/django/contrib/admin/media/"
+
+  <Directory /opt/graphite/conf>
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Location />
+    AuthName "Graphite Server"
+    AuthType Basic
+    AuthUserFile /etc/apache2/graphite.htpasswd
+    <Limit GET>
+      require valid-user
+    </Limit>
+  </Location>
+</VirtualHost>

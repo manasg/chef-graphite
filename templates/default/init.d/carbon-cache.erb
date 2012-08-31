@@ -1,0 +1,26 @@
+#!/bin/bash
+
+. /lib/lsb/init-functions
+
+RETVAL=0
+
+case "$1" in
+    start)
+        <%=@svc %> start
+        RETVAL=$?
+        ;;
+    stop)
+        <%=@svc %> stop
+        RETVAL=$? 
+        ;;
+    status)
+        <%=@svc %> status
+        RETVAL=$?
+        ;;
+    *)
+        echo "usage: /etc/init.d/carbon-cache {start|stop|status}"
+        ;;
+esac
+
+exit $RETVAL
+
