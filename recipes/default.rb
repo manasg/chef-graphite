@@ -16,13 +16,12 @@ node['graphite']['src'].each do |component, repo|
     end
 end
 
-
 node['graphite']['src'].each do |component, repo|
     execute "cd #{node['graphite']['src_dir']}/#{component}; python setup.py install" do
-        not_if node['graphite'][component]
+        not_if {node['graphite'][component] == "installed"}
     end
-    node['graphite'][component] = "installed"
-
+    node.set['graphite'][component] = "installed"
+    
 end
 
 user node['graphite']['carbon_user']
